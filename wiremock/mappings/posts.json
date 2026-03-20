@@ -1,0 +1,356 @@
+{
+  "mappings": [
+    {
+      "name": "GET /posts/feed",
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/api/posts/feed"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": 101,
+              "content": "Just finished my final year project presentation! Feeling great about how it went. Thanks to everyone who helped me prepare.",
+              "visibility": "PUBLIC",
+              "createdAt": "2026-03-20T09:15:00Z",
+              "author": {
+                "id": 2,
+                "fullName": "Jane Smith",
+                "avatarUrl": "https://i.pravatar.cc/150?u=2"
+              },
+              "taggedUsers": [],
+              "reactions": {
+                "counts": { "LIKE": 5, "LOVE": 2 },
+                "currentUserReaction": "LIKE"
+              },
+              "commentCount": 3
+            },
+            {
+              "id": 102,
+              "content": "Anyone else struggling with the distributed systems exam? Let's form a study group this weekend.",
+              "visibility": "FRIENDS",
+              "createdAt": "2026-03-19T21:00:00Z",
+              "author": {
+                "id": 3,
+                "fullName": "Mike Johnson",
+                "avatarUrl": "https://i.pravatar.cc/150?u=3"
+              },
+              "taggedUsers": [
+                { "id": 1, "fullName": "John Doe" },
+                { "id": 4, "fullName": "Emily Davis" }
+              ],
+              "reactions": {
+                "counts": { "LIKE": 3, "HAHA": 1, "CRY": 4 },
+                "currentUserReaction": null
+              },
+              "commentCount": 7
+            },
+            {
+              "id": 103,
+              "content": "Beautiful sunset at the campus lake today. Sometimes you need to stop and appreciate the little things.",
+              "visibility": "PUBLIC",
+              "createdAt": "2026-03-19T18:45:00Z",
+              "author": {
+                "id": 4,
+                "fullName": "Emily Davis",
+                "avatarUrl": "https://i.pravatar.cc/150?u=4"
+              },
+              "taggedUsers": [],
+              "reactions": {
+                "counts": { "LOVE": 8, "LIKE": 2 },
+                "currentUserReaction": "LOVE"
+              },
+              "commentCount": 1
+            },
+            {
+              "id": 104,
+              "content": "New blog post: 'Why Vue 3 Composition API changed the way I think about frontend architecture'. Link in bio.",
+              "visibility": "PUBLIC",
+              "createdAt": "2026-03-19T14:30:00Z",
+              "author": {
+                "id": 5,
+                "fullName": "Alex Turner",
+                "avatarUrl": "https://i.pravatar.cc/150?u=5"
+              },
+              "taggedUsers": [],
+              "reactions": {
+                "counts": { "LIKE": 12, "LOVE": 3 },
+                "currentUserReaction": null
+              },
+              "commentCount": 5
+            },
+            {
+              "id": 105,
+              "content": "Had an amazing time at the hackathon this weekend. Our team built a real-time collaboration tool in 24 hours!",
+              "visibility": "PUBLIC",
+              "createdAt": "2026-03-18T20:00:00Z",
+              "author": {
+                "id": 6,
+                "fullName": "Sarah Wilson",
+                "avatarUrl": "https://i.pravatar.cc/150?u=6"
+              },
+              "taggedUsers": [
+                { "id": 3, "fullName": "Mike Johnson" }
+              ],
+              "reactions": {
+                "counts": { "LIKE": 7, "HAHA": 2, "LOVE": 4 },
+                "currentUserReaction": null
+              },
+              "commentCount": 9
+            },
+            {
+              "id": 106,
+              "content": "Pro tip: if you're using Pinia with Vue 3, use the setup store syntax. It's so much cleaner than the options API style.",
+              "visibility": "PUBLIC",
+              "createdAt": "2026-03-18T11:20:00Z",
+              "author": {
+                "id": 2,
+                "fullName": "Jane Smith",
+                "avatarUrl": "https://i.pravatar.cc/150?u=2"
+              },
+              "taggedUsers": [],
+              "reactions": {
+                "counts": { "LIKE": 15 },
+                "currentUserReaction": "LIKE"
+              },
+              "commentCount": 2
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 6,
+          "number": 0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "name": "GET /posts/{postId}",
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/api/posts/[0-9]+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "id": 101,
+          "content": "Just finished my final year project presentation! Feeling great about how it went. Thanks to everyone who helped me prepare.",
+          "visibility": "PUBLIC",
+          "createdAt": "2026-03-20T09:15:00Z",
+          "author": {
+            "id": 2,
+            "fullName": "Jane Smith",
+            "avatarUrl": "https://i.pravatar.cc/150?u=2"
+          },
+          "taggedUsers": [],
+          "reactions": {
+            "counts": { "LIKE": 5, "LOVE": 2 },
+            "currentUserReaction": "LIKE"
+          },
+          "commentCount": 3
+        }
+      }
+    },
+    {
+      "name": "GET /posts/user/{userId}",
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/api/posts/user/.+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": 201,
+              "content": "Working on a new side project with Vue 3 and Tailwind. Really enjoying the developer experience so far.",
+              "visibility": "PUBLIC",
+              "createdAt": "2026-03-20T08:00:00Z",
+              "author": {
+                "id": 1,
+                "fullName": "John Doe",
+                "avatarUrl": "https://i.pravatar.cc/150?u=1"
+              },
+              "taggedUsers": [],
+              "reactions": {
+                "counts": { "LIKE": 4 },
+                "currentUserReaction": null
+              },
+              "commentCount": 1
+            },
+            {
+              "id": 202,
+              "content": "Completed my Spring Boot REST API certification today. One step closer to becoming a full-stack developer!",
+              "visibility": "FRIENDS",
+              "createdAt": "2026-03-17T16:00:00Z",
+              "author": {
+                "id": 1,
+                "fullName": "John Doe",
+                "avatarUrl": "https://i.pravatar.cc/150?u=1"
+              },
+              "taggedUsers": [
+                { "id": 2, "fullName": "Jane Smith" }
+              ],
+              "reactions": {
+                "counts": { "LIKE": 9, "LOVE": 3 },
+                "currentUserReaction": null
+              },
+              "commentCount": 4
+            },
+            {
+              "id": 203,
+              "content": "First day back on campus after spring break. Missed this place!",
+              "visibility": "PUBLIC",
+              "createdAt": "2026-03-10T07:30:00Z",
+              "author": {
+                "id": 1,
+                "fullName": "John Doe",
+                "avatarUrl": "https://i.pravatar.cc/150?u=1"
+              },
+              "taggedUsers": [],
+              "reactions": {
+                "counts": { "LIKE": 6, "LOVE": 1 },
+                "currentUserReaction": null
+              },
+              "commentCount": 0
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 3,
+          "number": 0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "name": "GET /posts/tagged/{userId}",
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/api/posts/tagged/.+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": 102,
+              "content": "Anyone else struggling with the distributed systems exam? Let's form a study group this weekend.",
+              "visibility": "FRIENDS",
+              "createdAt": "2026-03-19T21:00:00Z",
+              "author": {
+                "id": 3,
+                "fullName": "Mike Johnson",
+                "avatarUrl": "https://i.pravatar.cc/150?u=3"
+              },
+              "taggedUsers": [
+                { "id": 1, "fullName": "John Doe" },
+                { "id": 4, "fullName": "Emily Davis" }
+              ],
+              "reactions": {
+                "counts": { "LIKE": 3, "CRY": 4 },
+                "currentUserReaction": null
+              },
+              "commentCount": 7
+            },
+            {
+              "id": 301,
+              "content": "Throwback to our team winning the coding competition last month! Great memories.",
+              "visibility": "PUBLIC",
+              "createdAt": "2026-03-15T12:00:00Z",
+              "author": {
+                "id": 6,
+                "fullName": "Sarah Wilson",
+                "avatarUrl": "https://i.pravatar.cc/150?u=6"
+              },
+              "taggedUsers": [
+                { "id": 1, "fullName": "John Doe" },
+                { "id": 2, "fullName": "Jane Smith" },
+                { "id": 3, "fullName": "Mike Johnson" }
+              ],
+              "reactions": {
+                "counts": { "LOVE": 11, "LIKE": 6 },
+                "currentUserReaction": "LOVE"
+              },
+              "commentCount": 8
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 2,
+          "number": 0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "name": "POST /posts (create)",
+      "request": {
+        "method": "POST",
+        "urlPath": "/api/posts"
+      },
+      "response": {
+        "status": 201,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "id": 999,
+          "content": "This is a new post created via mock.",
+          "visibility": "PUBLIC",
+          "createdAt": "2026-03-20T12:00:00Z",
+          "author": {
+            "id": 1,
+            "fullName": "John Doe",
+            "avatarUrl": "https://i.pravatar.cc/150?u=1"
+          },
+          "taggedUsers": [],
+          "reactions": {
+            "counts": {},
+            "currentUserReaction": null
+          },
+          "commentCount": 0
+        }
+      }
+    },
+    {
+      "name": "PUT /posts/{postId} (update)",
+      "request": {
+        "method": "PUT",
+        "urlPathPattern": "/api/posts/[0-9]+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "id": 201,
+          "content": "Updated post content via mock.",
+          "visibility": "FRIENDS",
+          "createdAt": "2026-03-20T08:00:00Z",
+          "author": {
+            "id": 1,
+            "fullName": "John Doe",
+            "avatarUrl": "https://i.pravatar.cc/150?u=1"
+          },
+          "taggedUsers": [],
+          "reactions": {
+            "counts": { "LIKE": 4 },
+            "currentUserReaction": null
+          },
+          "commentCount": 1
+        }
+      }
+    },
+    {
+      "name": "DELETE /posts/{postId}",
+      "request": {
+        "method": "DELETE",
+        "urlPathPattern": "/api/posts/[0-9]+"
+      },
+      "response": {
+        "status": 204
+      }
+    }
+  ]
+}

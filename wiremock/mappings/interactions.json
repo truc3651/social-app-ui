@@ -1,0 +1,193 @@
+{
+  "mappings": [
+    {
+      "name": "GET /reactions/post/{postId}",
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/api/reactions/post/.+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "counts": { "LIKE": 5, "LOVE": 2, "HAHA": 1 },
+          "currentUserReaction": "LIKE"
+        }
+      }
+    },
+    {
+      "name": "POST /reactions (react)",
+      "request": {
+        "method": "POST",
+        "urlPath": "/api/reactions"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "Reaction saved"
+        }
+      }
+    },
+    {
+      "name": "DELETE /reactions/post/{postId} (remove reaction)",
+      "request": {
+        "method": "DELETE",
+        "urlPathPattern": "/api/reactions/post/.+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "Reaction removed"
+        }
+      }
+    },
+    {
+      "name": "GET /comments/post/{postId}",
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/api/comments/post/.+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": "c-001",
+              "content": "Congrats! You worked really hard on this, well deserved.",
+              "createdAt": "2026-03-20T09:30:00Z",
+              "parentCommentId": null,
+              "likeCount": 3,
+              "likedByCurrentUser": false,
+              "author": {
+                "id": 3,
+                "fullName": "Mike Johnson",
+                "avatarUrl": "https://i.pravatar.cc/150?u=3"
+              }
+            },
+            {
+              "id": "c-002",
+              "content": "Thanks Mike! Couldn't have done it without the study sessions.",
+              "createdAt": "2026-03-20T09:45:00Z",
+              "parentCommentId": "c-001",
+              "likeCount": 1,
+              "likedByCurrentUser": true,
+              "author": {
+                "id": 2,
+                "fullName": "Jane Smith",
+                "avatarUrl": "https://i.pravatar.cc/150?u=2"
+              }
+            },
+            {
+              "id": "c-003",
+              "content": "Awesome work! What was the topic of your presentation?",
+              "createdAt": "2026-03-20T10:00:00Z",
+              "parentCommentId": null,
+              "likeCount": 0,
+              "likedByCurrentUser": false,
+              "author": {
+                "id": 4,
+                "fullName": "Emily Davis",
+                "avatarUrl": "https://i.pravatar.cc/150?u=4"
+              }
+            },
+            {
+              "id": "c-004",
+              "content": "It was about building scalable social networks with microservices!",
+              "createdAt": "2026-03-20T10:15:00Z",
+              "parentCommentId": "c-003",
+              "likeCount": 2,
+              "likedByCurrentUser": false,
+              "author": {
+                "id": 2,
+                "fullName": "Jane Smith",
+                "avatarUrl": "https://i.pravatar.cc/150?u=2"
+              }
+            },
+            {
+              "id": "c-005",
+              "content": "So proud of you! Let's celebrate this weekend.",
+              "createdAt": "2026-03-20T11:00:00Z",
+              "parentCommentId": null,
+              "likeCount": 4,
+              "likedByCurrentUser": true,
+              "author": {
+                "id": 6,
+                "fullName": "Sarah Wilson",
+                "avatarUrl": "https://i.pravatar.cc/150?u=6"
+              }
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 5,
+          "number": 0,
+          "size": 20
+        }
+      }
+    },
+    {
+      "name": "POST /comments (create)",
+      "request": {
+        "method": "POST",
+        "urlPath": "/api/comments"
+      },
+      "response": {
+        "status": 201,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "id": "c-new",
+          "content": "New comment via mock",
+          "createdAt": "2026-03-20T12:00:00Z",
+          "parentCommentId": null,
+          "likeCount": 0,
+          "likedByCurrentUser": false,
+          "author": {
+            "id": 1,
+            "fullName": "John Doe",
+            "avatarUrl": "https://i.pravatar.cc/150?u=1"
+          }
+        }
+      }
+    },
+    {
+      "name": "DELETE /comments/{commentId}",
+      "request": {
+        "method": "DELETE",
+        "urlPathPattern": "/api/comments/[^/]+"
+      },
+      "response": {
+        "status": 204
+      }
+    },
+    {
+      "name": "POST /comments/{commentId}/like",
+      "request": {
+        "method": "POST",
+        "urlPathPattern": "/api/comments/.+/like"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "Comment liked"
+        }
+      }
+    },
+    {
+      "name": "DELETE /comments/{commentId}/like (unlike)",
+      "request": {
+        "method": "DELETE",
+        "urlPathPattern": "/api/comments/.+/like"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "Comment unliked"
+        }
+      }
+    }
+  ]
+}

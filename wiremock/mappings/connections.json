@@ -1,0 +1,353 @@
+{
+  "mappings": [
+    {
+      "name": "GET /friends",
+      "request": {
+        "method": "GET",
+        "urlPath": "/api/friends"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": 2,
+              "fullName": "Jane Smith",
+              "email": "jane.smith@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=2"
+            },
+            {
+              "id": 3,
+              "fullName": "Mike Johnson",
+              "email": "mike.johnson@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=3"
+            },
+            {
+              "id": 4,
+              "fullName": "Emily Davis",
+              "email": "emily.davis@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=4"
+            },
+            {
+              "id": 6,
+              "fullName": "Sarah Wilson",
+              "email": "sarah.wilson@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=6"
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 4,
+          "number": 0,
+          "size": 20
+        }
+      }
+    },
+    {
+      "name": "GET /friends/requests",
+      "request": {
+        "method": "GET",
+        "urlPath": "/api/friends/requests"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": "req-001",
+              "sender": {
+                "id": 7,
+                "fullName": "David Lee",
+                "email": "david.lee@example.com",
+                "avatarUrl": "https://i.pravatar.cc/150?u=7"
+              },
+              "createdAt": "2026-03-19T14:00:00Z"
+            },
+            {
+              "id": "req-002",
+              "sender": {
+                "id": 8,
+                "fullName": "Lisa Park",
+                "email": "lisa.park@example.com",
+                "avatarUrl": "https://i.pravatar.cc/150?u=8"
+              },
+              "createdAt": "2026-03-18T10:30:00Z"
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 2,
+          "number": 0,
+          "size": 20
+        }
+      }
+    },
+    {
+      "name": "POST /friends/requests (send)",
+      "request": {
+        "method": "POST",
+        "urlPath": "/api/friends/requests"
+      },
+      "response": {
+        "status": 201,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "id": "req-new",
+          "message": "Friend request sent successfully"
+        }
+      }
+    },
+    {
+      "name": "PUT /friends/requests/{id}/accept",
+      "request": {
+        "method": "PUT",
+        "urlPathPattern": "/api/friends/requests/.+/accept"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "Friend request accepted"
+        }
+      }
+    },
+    {
+      "name": "PUT /friends/requests/{id}/reject",
+      "request": {
+        "method": "PUT",
+        "urlPathPattern": "/api/friends/requests/.+/reject"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "Friend request rejected"
+        }
+      }
+    },
+    {
+      "name": "DELETE /friends/requests/{id} (cancel)",
+      "request": {
+        "method": "DELETE",
+        "urlPathPattern": "/api/friends/requests/.+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "Friend request cancelled"
+        }
+      }
+    },
+    {
+      "name": "DELETE /friends/{friendId} (remove)",
+      "request": {
+        "method": "DELETE",
+        "urlPathPattern": "/api/friends/[0-9]+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "Friend removed"
+        }
+      }
+    },
+    {
+      "name": "GET /friends/suggestions",
+      "request": {
+        "method": "GET",
+        "urlPath": "/api/friends/suggestions"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": 9,
+              "fullName": "Chris Evans",
+              "email": "chris.evans@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=9",
+              "mutualFriends": 3
+            },
+            {
+              "id": 10,
+              "fullName": "Rachel Green",
+              "email": "rachel.green@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=10",
+              "mutualFriends": 2
+            },
+            {
+              "id": 11,
+              "fullName": "Tom Anderson",
+              "email": "tom.anderson@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=11",
+              "mutualFriends": 2
+            },
+            {
+              "id": 12,
+              "fullName": "Nina Patel",
+              "email": "nina.patel@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=12",
+              "mutualFriends": 1
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 4,
+          "number": 0,
+          "size": 20
+        }
+      }
+    },
+    {
+      "name": "POST /follows/{userId} (follow)",
+      "request": {
+        "method": "POST",
+        "urlPathPattern": "/api/follows/[0-9]+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "User followed successfully"
+        }
+      }
+    },
+    {
+      "name": "DELETE /follows/{userId} (unfollow)",
+      "request": {
+        "method": "DELETE",
+        "urlPathPattern": "/api/follows/[0-9]+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "User unfollowed successfully"
+        }
+      }
+    },
+    {
+      "name": "GET /follows/following",
+      "request": {
+        "method": "GET",
+        "urlPath": "/api/follows/following"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": 5,
+              "fullName": "Alex Turner",
+              "email": "alex.turner@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=5"
+            },
+            {
+              "id": 2,
+              "fullName": "Jane Smith",
+              "email": "jane.smith@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=2"
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 2,
+          "number": 0,
+          "size": 20
+        }
+      }
+    },
+    {
+      "name": "GET /follows/followers",
+      "request": {
+        "method": "GET",
+        "urlPath": "/api/follows/followers"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": 3,
+              "fullName": "Mike Johnson",
+              "email": "mike.johnson@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=3"
+            },
+            {
+              "id": 6,
+              "fullName": "Sarah Wilson",
+              "email": "sarah.wilson@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=6"
+            },
+            {
+              "id": 7,
+              "fullName": "David Lee",
+              "email": "david.lee@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=7"
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 3,
+          "number": 0,
+          "size": 20
+        }
+      }
+    },
+    {
+      "name": "POST /blocks/{userId} (block)",
+      "request": {
+        "method": "POST",
+        "urlPathPattern": "/api/blocks/[0-9]+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "User blocked successfully"
+        }
+      }
+    },
+    {
+      "name": "DELETE /blocks/{userId} (unblock)",
+      "request": {
+        "method": "DELETE",
+        "urlPathPattern": "/api/blocks/[0-9]+"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "message": "User unblocked successfully"
+        }
+      }
+    },
+    {
+      "name": "GET /blocks",
+      "request": {
+        "method": "GET",
+        "urlPath": "/api/blocks"
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "jsonBody": {
+          "content": [
+            {
+              "id": 13,
+              "fullName": "Spam Bot",
+              "email": "spam.bot@example.com",
+              "avatarUrl": "https://i.pravatar.cc/150?u=13"
+            }
+          ],
+          "totalPages": 1,
+          "totalElements": 1,
+          "number": 0,
+          "size": 20
+        }
+      }
+    }
+  ]
+}
