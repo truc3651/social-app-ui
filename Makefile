@@ -1,8 +1,3 @@
-# ==============================================================================
-# SocialApp — WireMock Mock Server
-# Supports: macOS (Apple Silicon + Intel) and Windows (Git Bash / MSYS2)
-# ==============================================================================
-
 WIREMOCK_IMAGE   = wiremock/wiremock:3.13.0
 CONTAINER_NAME   = socialapp-wiremock
 HOST_PORT        = 8080
@@ -56,11 +51,7 @@ endif
 .PHONY: mock mock-stop mock-restart mock-logs mock-status mock-clean \
         dev help docker-check docker-install docker-ensure
 
-# ==============================================================================
-# Docker prerequisite targets
-# ==============================================================================
-
-docker-check: ## Check Docker installation and daemon status
+docker-check:
 	@echo "Platform: $(DETECTED_OS)/$(DETECTED_ARCH)"
 	@echo ""
 	@if command -v docker >/dev/null 2>&1; then \
@@ -74,7 +65,7 @@ docker-check: ## Check Docker installation and daemon status
 		echo "Docker daemon: NOT running"; \
 	fi
 
-docker-install: ## Download and install Docker Desktop for your platform
+docker-install:
 	@if command -v docker >/dev/null 2>&1; then \
 		echo "Docker is already installed: $$(docker --version)"; \
 		exit 0; \
@@ -140,7 +131,7 @@ docker-install: ## Download and install Docker Desktop for your platform
 		exit 1; \
 	fi
 
-docker-ensure: ## Install Docker if missing, then ensure the daemon is running
+docker-ensure:
 	@if ! command -v docker >/dev/null 2>&1; then \
 		$(MAKE) docker-install; \
 	fi; \
@@ -171,11 +162,7 @@ docker-ensure: ## Install Docker if missing, then ensure the daemon is running
 	echo ""; \
 	echo "Docker daemon is ready."
 
-# ==============================================================================
-# WireMock targets
-# ==============================================================================
-
-mock: docker-ensure ## Start WireMock mock server on port $(HOST_PORT)
+mock: docker-ensure
 	@docker run -d --rm \
 		--name $(CONTAINER_NAME) \
 		-p $(HOST_PORT):$(WIREMOCK_PORT) \
@@ -189,29 +176,25 @@ mock: docker-ensure ## Start WireMock mock server on port $(HOST_PORT)
 	@echo ""
 	@echo "Stop with:  make mock-stop"
 
-mock-stop: ## Stop WireMock container
+mock-stop:
 	@docker stop $(CONTAINER_NAME) 2>/dev/null || echo "Container not running"
 
-mock-restart: mock-stop mock ## Restart WireMock (picks up mapping changes)
+mock-restart: mock-stop mock
 
-mock-logs: ## Tail WireMock container logs
+mock-logs:
 	@docker logs -f $(CONTAINER_NAME)
 
-mock-status: ## Show loaded stub mappings count
+mock-status:
 	@curl -s http://localhost:$(HOST_PORT)/__admin/mappings | \
 		python3 -c "import sys,json; d=json.load(sys.stdin); print(f\"{d['meta']['total']} stub mappings loaded\")" \
 		2>/dev/null || echo "WireMock is not running"
 
-mock-clean: mock-stop ## Stop WireMock and remove the Docker image
+mock-clean: mock-stop
 	@docker rmi $(WIREMOCK_IMAGE) 2>/dev/null || true
 
-# ==============================================================================
-# Dev convenience
-# ==============================================================================
-
-dev: mock ## Start WireMock + Vite dev server
+dev: mock
 	@npm run dev
 
-help: ## Show this help
+help:
 	@grep -E '^[a-z_-]+:.*## ' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getCookie } from '@/utils/localStorage'
 
 const LoginPage = () => import('@/pages/auth/LoginPage.vue')
 const RegisterPage = () => import('@/pages/auth/RegisterPage.vue')
@@ -32,7 +33,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const hasToken = !!localStorage.getItem('accessToken')
+  const token = getCookie('accessToken')
+  const hasToken = !!token
 
   if (to.meta.requiresAuth && !hasToken) {
     return { name: 'login' }

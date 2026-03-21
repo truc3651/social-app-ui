@@ -27,7 +27,7 @@ async function handleLogin() {
   <div class="max-w-sm mx-auto mt-16">
     <div class="bg-white border border-gray-300 rounded p-6">
       <h1 class="text-xl font-bold text-gray-800 mb-1">Sign In</h1>
-      <p class="text-sm text-gray-500 mb-6">Welcome back to SocialApp</p>
+      <p class="text-sm text-gray-500 mb-6">Welcome back to Elite Nexus</p>
 
       <BaseAlert
         v-if="authStore.error"

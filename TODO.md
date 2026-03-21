@@ -1,0 +1,7 @@
+- Create file constants.js in utils (route names, cookie names, backend friend request statuses)
+- Correct API endpoints: useAuthStore, useConnectionStore
+- Update wiremock
+- Create search bar in navbar
+- Create chat window and button in navbar
+- Centralize error handler for API calls with fallback error message, response handler for API calls
+- Centralize error message (error reactive) and loading spining (loading reactive)
