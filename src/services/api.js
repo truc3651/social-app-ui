@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { getCookie, deleteCookie } from '@/utils/localStorage'
-
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/utils/constants'
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api'
 
 const api = axios.create({
@@ -11,7 +11,7 @@ const api = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-  const token = getCookie('accessToken')
+  const token = getCookie(ACCESS_TOKEN)
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -22,8 +22,8 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      deleteCookie('accessToken')
-      deleteCookie('refreshToken')
+      deleteCookie(ACCESS_TOKEN)
+      deleteCookie(REFRESH_TOKEN)
       window.location.href = '/login'
     }
     return Promise.reject(error)

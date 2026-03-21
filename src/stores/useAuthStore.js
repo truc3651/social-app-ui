@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import authService from '@/services/authService'
 import { getCookie, deleteCookie, setCookie } from '@/utils/localStorage'
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/utils/constants'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
@@ -22,8 +23,8 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
     try {
       const { data } = await authService.login(credentials)
-      setCookie('accessToken', data.accessToken)
-      setCookie('refreshToken', data.refreshToken)
+      setCookie(ACCESS_TOKEN, data.accessToken)
+      setCookie(REFRESH_TOKEN, data.refreshToken)
       user.value = data.user
       return data
     } catch (err) {
@@ -53,8 +54,8 @@ export const useAuthStore = defineStore('auth', () => {
       await authService.logout()
     } finally {
       user.value = null
-      deleteCookie('accessToken')
-      deleteCookie('refreshToken')
+      deleteCookie(ACCESS_TOKEN)
+      deleteCookie(REFRESH_TOKEN)
     }
   }
 
@@ -73,15 +74,15 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchCurrentUser() {
-    if (!getCookie('accessToken')) return
+    if (!getCookie(ACCESS_TOKEN)) return
     loading.value = true
     try {
       const { data } = await authService.getCurrentUser()
       user.value = data
     } catch {
       user.value = null
-      deleteCookie('accessToken')
-      deleteCookie('refreshToken')
+      deleteCookie(ACCESS_TOKEN)
+      deleteCookie(REFRESH_TOKEN)
     } finally {
       loading.value = false
     }

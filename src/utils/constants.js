@@ -19,3 +19,6 @@ export const VISIBILITY_LABELS = {
   FRIENDS: 'Friends',
   ONLY_ME: 'Only Me',
 }
+
+export const ACCESS_TOKEN = 'accessToken'
+export const REFRESH_TOKEN = 'refreshToken'
