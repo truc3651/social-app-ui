@@ -1,51 +1,58 @@
 import api from './api'
 
-const AUTH_BASE = '/auth'
+/** Paths align with OpenAPI 3.1 (backend-users-api): /v1/api/... */
+const ROOT = 'v1/api'
 
 export default {
-  login(credentials) {
-    return api.post(`${AUTH_BASE}/login`, credentials)
+  login(body) {
+    return api.post(`${ROOT}/auth/login`, body)
   },
 
-  register(userData) {
-    return api.post(`${AUTH_BASE}/register`, userData)
+  register(body) {
+    return api.post(`${ROOT}/auth/register`, body)
   },
 
-  logout() {
-    return api.post(`${AUTH_BASE}/logout`)
+  logout(body) {
+    return api.post(`${ROOT}/auth/logout`, body)
   },
 
-  forgotPassword(email) {
-    return api.post(`${AUTH_BASE}/forgot-password`, { email })
+  refreshToken(body) {
+    return api.post(`${ROOT}/auth/refresh`, body)
   },
 
-  resetPassword(payload) {
-    return api.post(`${AUTH_BASE}/reset-password`, payload)
+  validateToken(body) {
+    return api.post(`${ROOT}/auth/validate-token`, body)
   },
 
-  getCurrentUser() {
-    return api.get(`${AUTH_BASE}/me`)
+  forgotPassword(body) {
+    return api.post(`${ROOT}/auth/forgot-password`, body)
   },
 
-  updateProfile(profileData) {
-    return api.put(`${AUTH_BASE}/profile`, profileData)
+  resetPassword(body) {
+    return api.post(`${ROOT}/auth/reset-password`, body)
   },
 
-  updateAvatar(formData) {
-    return api.put(`${AUTH_BASE}/profile/avatar`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
+  getProfile() {
+    return api.get(`${ROOT}/me/profile`)
   },
 
-  getActiveSessions() {
-    return api.get(`${AUTH_BASE}/sessions`)
+  updateProfile(body) {
+    return api.put(`${ROOT}/me/profile`, body)
   },
 
-  revokeSession(sessionId) {
-    return api.delete(`${AUTH_BASE}/sessions/${sessionId}`)
+  listSessions(params) {
+    return api.get(`${ROOT}/me/sessions`, { params })
   },
 
-  revokeAllOtherSessions() {
-    return api.delete(`${AUTH_BASE}/sessions`)
+  revokeSession(body) {
+    return api.post(`${ROOT}/me/sessions/revoke`, body)
+  },
+
+  revokeOtherSessions(body) {
+    return api.post(`${ROOT}/me/sessions/revoke-others`, body)
+  },
+
+  changePassword(body) {
+    return api.post(`${ROOT}/me/change-password`, body)
   },
 }
