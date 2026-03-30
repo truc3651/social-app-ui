@@ -42,10 +42,8 @@ async function saveProfile() {
   showEditModal.value = false
 }
 
-function handleAvatarChange(event) {
-  const file = event.target.files?.[0]
-  if (!file) return
-  authStore.updateAvatar(file)
+async function handlePictureUrlSubmit(url) {
+  await authStore.updateProfile({ profilePictureUrl: url })
 }
 </script>
 
@@ -53,20 +51,13 @@ function handleAvatarChange(event) {
   <div>
     <div class="bg-white border border-gray-300 rounded p-6 mb-6">
       <div class="flex items-start gap-4">
-        <div class="relative">
-          <UserAvatar
-            :src="authStore.user?.avatarUrl"
-            :name="authStore.fullName"
-            size="lg"
-          />
-          <label
-            v-if="isOwnProfile"
-            class="absolute bottom-0 right-0 bg-white border border-gray-300 rounded-full w-6 h-6 flex items-center justify-center cursor-pointer text-xs text-gray-600 hover:bg-gray-100"
-          >
-            <input type="file" accept="image/*" class="hidden" @change="handleAvatarChange" />
-            +
-          </label>
-        </div>
+        <UserAvatar
+          :src="authStore.user?.avatarUrl"
+          :name="authStore.fullName"
+          size="lg"
+          :allow-picture-url-edit="isOwnProfile"
+          @picture-url-submit="handlePictureUrlSubmit"
+        />
 
         <div class="flex-1">
           <h1 class="text-xl font-bold text-gray-800">
