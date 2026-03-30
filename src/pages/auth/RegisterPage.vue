@@ -66,7 +66,7 @@ async function handleRegister() {
       />
 
       <form @submit.prevent="handleRegister">
-        <BaseInput
+      <BaseInput
           v-model="fullName"
           label="Full Name"
           placeholder="John Doe"
