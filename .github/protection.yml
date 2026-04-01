@@ -1,0 +1,20 @@
+# This represents the configuration for a GitHub Branch Ruleset
+name: "Protect Master Branch"
+target: "branch"
+enforcement: "active"
+conditions:
+  ref_name:
+    include: ["refs/heads/master"]
+    exclude: []
+rules:
+  # 1. Block direct pushes to master
+  - type: "pull_request"
+    parameters:
+      # 2. Require at least 1 approval
+      required_approving_review_count: 1
+      dismiss_stale_reviews_on_push: true
+      require_code_owner_review: false
+      # 3. All comments must be resolved
+      required_review_thread_resolution: true
+  - type: "deletion"
+  - type: "non_fast_forward" # Prevents force pushes
