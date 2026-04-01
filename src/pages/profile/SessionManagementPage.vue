@@ -9,6 +9,12 @@ import { formatDateTime } from '@/utils/formatDate'
 const authStore = useAuthStore()
 const showRevokeAllDialog = ref(false)
 
+function shortToken(token) {
+  if (!token) return ''
+  if (token.length <= 16) return token
+  return `${token.slice(0, 10)}…${token.slice(-6)}`
+}
+
 onMounted(() => {
   authStore.fetchSessions()
 })
@@ -44,26 +50,26 @@ async function revokeAll() {
     <div v-else class="space-y-3">
       <div
         v-for="session in authStore.sessions"
-        :key="session.id"
+        :key="session.token"
         class="bg-white border border-gray-300 rounded p-4 flex items-center justify-between"
       >
         <div>
-          <p class="text-sm font-medium text-gray-800">
-            {{ session.deviceInfo || 'Unknown Device' }}
-            <span v-if="session.current" class="text-xs text-green-600 ml-2">(Current)</span>
+          <p class="text-sm font-medium text-gray-800 font-mono">
+            {{ shortToken(session.token) }}
+            <span v-if="session.current" class="text-xs text-green-600 ml-2 font-sans">(Current)</span>
           </p>
           <p class="text-xs text-gray-500 mt-1">
-            Last active: {{ formatDateTime(session.lastActiveAt) }}
+            Created: {{ formatDateTime(session.createdAt) }}
           </p>
           <p class="text-xs text-gray-400">
-            IP: {{ session.ipAddress || 'N/A' }}
+            Expires: {{ formatDateTime(session.expiresAt) }}
           </p>
         </div>
         <BaseButton
           v-if="!session.current"
           variant="danger"
           size="sm"
-          @click="authStore.revokeSession(session.id)"
+          @click="authStore.revokeSession(session.token)"
         >
           Revoke
         </BaseButton>
